@@ -1,0 +1,27 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [],
+  "env": { "browser": true, "node": true },
+  "rules": {
+    "for-direction": "warn",
+    "no-async-promise-executor": "warn",
+    "no-compare-neg-zero": "warn",
+    "no-cond-assign": "warn",
+    "no-control-regex": "warn",
+    "no-debugger": "warn",
+    "no-dupe-else-if": "warn",
+    "no-duplicate-case": "warn",
+    "no-empty": "warn",
+    "no-empty-character-class": "warn",
+    "no-ex-assign": "warn",
+    "no-extra-boolean-cast": "warn",
+    "no-invalid-regexp": "warn",
+    "no-irregular-whitespace": "warn",
+    "no-regex-spaces": "warn",
+    "no-sparse-arrays": "warn",
+    "no-template-curly-in-string": "warn",
+    "no-unreachable": "warn",
+    "no-unsafe-finally": "warn",
+    "use-isnan": "warn"
+  }
+}

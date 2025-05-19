@@ -1,0 +1,26 @@
+{
+  "name": "@arnaud-barre/type-lint-config",
+  "description": "TS-React focused type-lint configuration",
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "module",
+  "author": "Arnaud Barré (https://github.com/ArnaudBarre)",
+  "private": true,
+  "prettier": {
+    "experimentalOperatorPosition": "start",
+    "plugins": [
+      "@arnaud-barre/prettier-plugin-sort-imports"
+    ]
+  },
+  "peerDependencies": {
+    "typescript": "~5.8"
+  },
+  "dependencies": {
+    "@arnaud-barre/type-lint": "^0.0.2",
+    "oxlint": "^0.16.11"
+  },
+  "devDependencies": {
+    "@arnaud-barre/prettier-plugin-sort-imports": "^0.2.1",
+    "prettier": "^3.5.3"
+  }
+}
