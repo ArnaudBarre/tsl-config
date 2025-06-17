@@ -1,11 +1,11 @@
-# type-lint-config
+# type-lint-config [![npm](https://img.shields.io/npm/v/@arnaud-barre/type-lint-config)](https://www.npmjs.com/package/@arnaud-barre/type-lint-config)
 
-Ongoing port of https://github.com/ArnaudBarre/eslint-config
+Ongoing port of https://github.com/ArnaudBarre/eslint-config for https://github.com/ArnaudBarre/type-lint
 
 ## Install
 
 ```sh
-yarn add --dev eslint @arnaud-barre/type-lint-config
+bun add -D @arnaud-barre/type-lint @arnaud-barre/type-lint-config
 ```
 
 ```js
@@ -21,8 +21,7 @@ export default defineConfig({
 ```json
 // package.json
 "scripts": {
-  "lint": "bun lint-ci --fix --cache",
-  "lint-ci": "eslint --max-warnings 0"
+  "tsc": "type-lint"
 }
 ```
 
@@ -37,7 +36,10 @@ export default defineConfig({
     "target": "ES2022",
     "jsx": "react-jsx",
     "module": "ESNext",
+    "moduleDetection": "force",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["vite/client", "@arnaud-barre/type-lint/patches"],
+    "skipLibCheck": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -47,14 +49,15 @@ export default defineConfig({
     "noEmit": true,
 
     /* Linting */
-    "skipLibCheck": true,
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "useUnknownInCatchVariables": true,
     "noUncheckedSideEffectImports": true,
-    "noPropertyAccessFromIndexSignature": true
+    "noPropertyAccessFromIndexSignature": true,
+
+    "plugins": [{ "name": "@arnaud-barre/type-lint/plugin" }]
   }
 }
 ```
@@ -67,7 +70,10 @@ export default defineConfig({
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
-    "lib": ["ES2023"]
+    "moduleDetection": "force",
+    "lib": ["ES2023"],
+    "types": ["node", "@arnaud-barre/type-lint/patches"],
+    "skipLibCheck": true
 
     /* Same as web */
   }

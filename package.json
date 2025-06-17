@@ -6,6 +6,16 @@
   "type": "module",
   "author": "Arnaud Barré (https://github.com/ArnaudBarre)",
   "private": true,
+  "scripts": {
+    "postinstall": "bun run build",
+    "test": "node scripts/tests.ts",
+    "build": "node scripts/bundle.ts && publint dist",
+    "tsc": "type-lint",
+    "prettier": "prettier --write '**/*.{js,cjs,ts,json,md}'",
+    "prettier-ci": "bun prettier --check",
+    "ci": "bun run build && bun tsc && bun prettier-ci && bun run test",
+    "release": "bun ci && cd dist && bun publish"
+  },
   "prettier": {
     "experimentalOperatorPosition": "start",
     "plugins": [
@@ -13,14 +23,15 @@
     ]
   },
   "peerDependencies": {
+    "@arnaud-barre/type-lint": "^0.0.5",
     "typescript": "~5.8"
-  },
-  "dependencies": {
-    "@arnaud-barre/type-lint": "^0.0.2",
-    "oxlint": "^0.16.11"
   },
   "devDependencies": {
     "@arnaud-barre/prettier-plugin-sort-imports": "^0.2.1",
-    "prettier": "^3.5.3"
+    "@types/node": "^24.0.3",
+    "@types/react": "^19.1.8",
+    "prettier": "^3.5.3",
+    "publint": "^0.3.12",
+    "tsdown": "^0.12.8"
   }
 }
