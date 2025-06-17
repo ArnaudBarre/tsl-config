@@ -107,3 +107,9 @@ export default defineConfig({
   ]
 }
 ```
+
+### Custom rules
+
+- jsxKey: Validate JSX has key prop when in array or iterator
+- arrayCallbackReturn: Ensure array callbacks that require a return value (map, filter, find, some, ...) don't have undefined in their return type
+- jsxNoNumberTruthiness: Disallow `list.length && ...` in JSX
