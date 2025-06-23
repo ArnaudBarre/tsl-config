@@ -1,7 +1,7 @@
-import { core, createRulesSet } from "@arnaud-barre/type-lint";
-import { arrayCallbackReturn } from "./rules/arrayCallbackReturn";
-import { jsxKey } from "./rules/jsxKey";
-import { jsxNoNumberTruthiness } from "./rules/jsxNoNumberTruthiness";
+import { core, createRulesSet } from "tsl";
+import { arrayCallbackReturn } from "./rules/arrayCallbackReturn.ts";
+import { jsxKey } from "./rules/jsxKey.ts";
+import { jsxNoNumberTruthiness } from "./rules/jsxNoNumberTruthiness.ts";
 
 export const arnaudBarre = createRulesSet({
   arrayCallbackReturn,
@@ -24,6 +24,10 @@ export const allRules = [
   core.switchExhaustivenessCheck({
     allowDefaultCaseForExhaustiveSwitch: false,
     considerDefaultExhaustiveForUnions: true,
+  }),
+  core.strictBooleanExpressions({
+    allowNullableString: true,
+    allowNullableBoolean: true,
   }),
   ...arnaudBarre.all(),
 ];

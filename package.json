@@ -1,6 +1,6 @@
 {
-  "name": "@arnaud-barre/type-lint-config",
-  "description": "TS-React focused type-lint configuration",
+  "name": "@arnaud-barre/tsl-config",
+  "description": "TS-React focused tsl configuration",
   "version": "0.1.0",
   "license": "MIT",
   "type": "module",
@@ -10,7 +10,7 @@
     "postinstall": "bun run build",
     "test": "node scripts/tests.ts",
     "build": "node scripts/bundle.ts && publint dist",
-    "tsc": "type-lint",
+    "tsc": "tsl",
     "prettier": "prettier --write '**/*.{js,cjs,ts,json,md}'",
     "prettier-ci": "bun prettier --check",
     "ci": "bun run build && bun tsc && bun prettier-ci && bun run test",
@@ -23,7 +23,7 @@
     ]
   },
   "peerDependencies": {
-    "@arnaud-barre/type-lint": "^0.0.5",
+    "tsl": "^1.0.16",
     "typescript": "~5.8"
   },
   "devDependencies": {

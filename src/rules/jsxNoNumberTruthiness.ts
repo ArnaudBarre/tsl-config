@@ -1,6 +1,5 @@
-import { defineRule } from "@arnaud-barre/type-lint";
-import { ruleTester } from "@arnaud-barre/type-lint/ruleTester";
-import { isTypeFlagSet, unionConstituents } from "ts-api-utils";
+import { defineRule } from "tsl";
+import { ruleTester } from "tsl/ruleTester";
 import { SyntaxKind, TypeFlags } from "typescript";
 
 const message =
@@ -9,17 +8,13 @@ const message =
 export const jsxNoNumberTruthiness = defineRule(() => ({
   name: "arnaudBarre/jsxNoNumberTruthiness",
   visitor: {
-    BinaryExpression(node, context) {
+    BinaryExpression(context, node) {
       if (node.operatorToken.kind !== SyntaxKind.AmpersandAmpersandToken) {
         return;
       }
       if (node.parent.kind !== SyntaxKind.JsxExpression) return;
       const type = context.checker.getTypeAtLocation(node.left);
-      if (
-        unionConstituents(type).some((subType) =>
-          isTypeFlagSet(subType, TypeFlags.NumberLike),
-        )
-      ) {
+      if (context.utils.typeOrUnionHasFlag(type, TypeFlags.NumberLike)) {
         context.report({ node, message });
       }
     },

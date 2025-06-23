@@ -16,7 +16,7 @@ writeFileSync(
       version: packageJSON.version,
       author: packageJSON.author,
       license: packageJSON.license,
-      repository: "github:ArnaudBarre/type-lint-config",
+      repository: "github:ArnaudBarre/tsl-config",
       type: "module",
       exports: {
         ".": "./index.js",

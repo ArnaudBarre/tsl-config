@@ -1,5 +1,5 @@
-import { defineRule } from "@arnaud-barre/type-lint";
-import { ruleTester } from "@arnaud-barre/type-lint/ruleTester";
+import { defineRule } from "tsl";
+import { ruleTester } from "tsl/ruleTester";
 import { SyntaxKind, TypeFlags } from "typescript";
 
 const base =
@@ -32,7 +32,7 @@ const methods = Object.keys(methodsRecords);
 export const arrayCallbackReturn = defineRule(() => ({
   name: "arnaudBarre/arrayCallbackReturn",
   visitor: {
-    PropertyAccessExpression(node, context) {
+    PropertyAccessExpression(context, node) {
       if (
         node.name.kind === SyntaxKind.Identifier
         && methods.includes(node.name.text)

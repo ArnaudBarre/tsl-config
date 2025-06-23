@@ -1,5 +1,5 @@
-import { type AST, type Context, defineRule } from "@arnaud-barre/type-lint";
-import { ruleTester } from "@arnaud-barre/type-lint/ruleTester";
+import { type AST, type Context, defineRule } from "tsl";
+import { ruleTester } from "tsl/ruleTester";
 import { SyntaxKind } from "typescript";
 
 const reactComponentNameRE = /^[A-Z][a-zA-Z0-9]*$/u;
@@ -117,22 +117,22 @@ export const jsxKey = defineRule(() => {
   return {
     name: "arnaudBarre/jsxKey",
     visitor: {
-      JsxElement(node, context) {
+      JsxElement(context, node) {
         if (node.parent.kind === SyntaxKind.ArrayLiteralExpression) {
           checkElement(node, context);
         }
       },
-      JsxSelfClosingElement(node, context) {
+      JsxSelfClosingElement(context, node) {
         if (node.parent.kind === SyntaxKind.ArrayLiteralExpression) {
           checkElement(node, context);
         }
       },
-      JsxFragment(node, context) {
+      JsxFragment(context, node) {
         if (node.parent.kind === SyntaxKind.ArrayLiteralExpression) {
           reportFragment(node, context);
         }
       },
-      CallExpression(node, context) {
+      CallExpression(context, node) {
         if (
           node.expression.kind === SyntaxKind.PropertyAccessExpression
           && node.expression.name.kind === SyntaxKind.Identifier
@@ -149,7 +149,7 @@ export const jsxKey = defineRule(() => {
           }
         }
       },
-      VariableDeclaration(node, context) {
+      VariableDeclaration(context, node) {
         if (node.initializer?.kind !== SyntaxKind.ArrowFunction) return;
         if (node.name.kind !== SyntaxKind.Identifier) return;
         checkIfReactComponentWithKeyInProps(
@@ -158,7 +158,7 @@ export const jsxKey = defineRule(() => {
           context,
         );
       },
-      FunctionDeclaration(node, context) {
+      FunctionDeclaration(context, node) {
         if (!node.name) return;
         checkIfReactComponentWithKeyInProps(node.name, node, context);
       },

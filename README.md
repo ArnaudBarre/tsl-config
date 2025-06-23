@@ -1,17 +1,17 @@
-# type-lint-config [![npm](https://img.shields.io/npm/v/@arnaud-barre/type-lint-config)](https://www.npmjs.com/package/@arnaud-barre/type-lint-config)
+# @arnaud-barre/tsl-config [![npm](https://img.shields.io/npm/v/@arnaud-barre/tsl-config)](https://www.npmjs.com/package/@arnaud-barre/tsl-config)
 
-Ongoing port of https://github.com/ArnaudBarre/eslint-config for https://github.com/ArnaudBarre/type-lint
+Ongoing port of https://github.com/ArnaudBarre/eslint-config for https://github.com/ArnaudBarre/tsl
 
 ## Install
 
 ```sh
-bun add -D @arnaud-barre/type-lint @arnaud-barre/type-lint-config
+bun add -D tsl @arnaud-barre/tsl-config
 ```
 
 ```js
-// type-lint.config.ts
-import { defineConfig } from "@arnaud-barre/type-lint";
-import { allRules } from "@arnaud-barre/type-lint-config";
+// tsl.config.ts
+import { allRules } from "@arnaud-barre/tsl-config";
+import { defineConfig } from "tsl";
 
 export default defineConfig({
   rules: [...allRules],
@@ -21,7 +21,7 @@ export default defineConfig({
 ```json
 // package.json
 "scripts": {
-  "tsc": "type-lint"
+  "tsc": "tsl"
 }
 ```
 
@@ -38,7 +38,7 @@ export default defineConfig({
     "module": "ESNext",
     "moduleDetection": "force",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "types": ["vite/client", "@arnaud-barre/type-lint/patches"],
+    "types": ["vite/client", "tsl/patches"],
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -57,7 +57,7 @@ export default defineConfig({
     "noUncheckedSideEffectImports": true,
     "noPropertyAccessFromIndexSignature": true,
 
-    "plugins": [{ "name": "@arnaud-barre/type-lint/plugin" }]
+    "plugins": [{ "name": "tsl/plugin" }]
   }
 }
 ```
@@ -72,7 +72,7 @@ export default defineConfig({
     "module": "ESNext",
     "moduleDetection": "force",
     "lib": ["ES2023"],
-    "types": ["node", "@arnaud-barre/type-lint/patches"],
+    "types": ["node", "tsl/patches"],
     "skipLibCheck": true
 
     /* Same as web */

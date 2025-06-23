@@ -5,7 +5,7 @@
     "module": "ESNext",
     "moduleDetection": "force",
     "lib": ["ES2023"],
-    "types": ["node", "@arnaud-barre/type-lint/patches"],
+    "types": ["node", "tsl/patches"],
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -24,6 +24,6 @@
     "noUncheckedSideEffectImports": true,
     "noPropertyAccessFromIndexSignature": true,
 
-    "plugins": [{ "name": "@arnaud-barre/type-lint/plugin" }]
+    "plugins": [{ "name": "tsl/plugin" }]
   }
 }
