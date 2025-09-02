@@ -1,7 +1,7 @@
 {
   "name": "@arnaud-barre/tsl-config",
   "description": "TS-React focused tsl configuration",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "type": "module",
   "author": "Arnaud Barré (https://github.com/ArnaudBarre)",
@@ -14,7 +14,7 @@
     "prettier": "prettier --write '**/*.{js,cjs,ts,json,md}'",
     "prettier-ci": "bun prettier --check",
     "ci": "bun run build && bun tsc && bun prettier-ci && bun run test",
-    "release": "bun ci && cd dist && bun publish"
+    "release": "bun run ci && cd dist && bun publish"
   },
   "prettier": {
     "experimentalOperatorPosition": "start",
@@ -23,15 +23,15 @@
     ]
   },
   "peerDependencies": {
-    "tsl": "^1.0.16",
-    "typescript": "~5.8"
+    "tsl": "^1.0.22",
+    "typescript": "~5.9"
   },
   "devDependencies": {
-    "@arnaud-barre/prettier-plugin-sort-imports": "^0.2.1",
-    "@types/node": "^24.0.3",
-    "@types/react": "^19.1.8",
-    "prettier": "^3.5.3",
+    "@arnaud-barre/prettier-plugin-sort-imports": "^0.2.2",
+    "@types/node": "^24.3.0",
+    "@types/react": "^19.1.12",
+    "prettier": "^3.6.2",
     "publint": "^0.3.12",
-    "tsdown": "^0.12.8"
+    "tsdown": "^0.14.2"
   }
 }

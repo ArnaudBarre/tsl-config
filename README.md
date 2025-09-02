@@ -25,7 +25,7 @@ export default defineConfig({
 }
 ```
 
-## TS config (5.8)
+## TS config (5.9)
 
 ### Web project
 
@@ -38,7 +38,7 @@ export default defineConfig({
     "module": "ESNext",
     "moduleDetection": "force",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "types": ["vite/client", "tsl/patches"],
+    "types": ["vite/client"],
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -55,14 +55,12 @@ export default defineConfig({
     "noFallthroughCasesInSwitch": true,
     "useUnknownInCatchVariables": true,
     "noUncheckedSideEffectImports": true,
-    "noPropertyAccessFromIndexSignature": true,
-
-    "plugins": [{ "name": "tsl/plugin" }]
+    "noPropertyAccessFromIndexSignature": true
   }
 }
 ```
 
-### Node project (20-22)
+### Node project (22)
 
 ```json
 {
@@ -71,8 +69,8 @@ export default defineConfig({
     "target": "ES2022",
     "module": "ESNext",
     "moduleDetection": "force",
-    "lib": ["ES2023"],
-    "types": ["node", "tsl/patches"],
+    "lib": ["es2024", "ESNext.Array", "ESNext.Collection", "ESNext.Iterator"],
+    "types": ["node"],
     "skipLibCheck": true
 
     /* Same as web */
@@ -80,7 +78,31 @@ export default defineConfig({
 }
 ```
 
-## Prettier config (3.5.3)
+### Node project (24)
+
+```json
+{
+  "include": ["**/*.ts"],
+  "compilerOptions": {
+    "target": "ES2024",
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "lib": [
+      "es2024",
+      "ESNext.Array",
+      "ESNext.Collection",
+      "ESNext.Iterator",
+      "ESNext.Promise"
+    ],
+    "types": ["node"],
+    "skipLibCheck": true
+
+    /* Same as web */
+  }
+}
+```
+
+## Prettier config (3.6.2)
 
 ### Web projects
 
