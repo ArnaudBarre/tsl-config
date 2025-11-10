@@ -3,7 +3,12 @@ import { writeFileSync } from "node:fs";
 import { build } from "tsdown";
 import packageJSON from "../package.json" with { type: "json" };
 
-await build({ entry: "src/index.ts", dts: true });
+await build({
+  entry: "src/index.ts",
+  dts: true,
+  fixedExtension: false,
+  treeshake: { moduleSideEffects: [] },
+});
 
 execSync("cp LICENSE README.md dist/");
 
