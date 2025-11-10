@@ -54,9 +54,9 @@ export const arrayCallbackReturn = defineRule(() => ({
           const type = signature.getReturnType();
           /* eslint-disable no-bitwise */
           if (
-            type.flags & TypeFlags.Undefined
+            (type.flags & TypeFlags.Undefined) !== 0
             || (type.isUnion()
-              && type.types.some((t) => t.flags & TypeFlags.Undefined))
+              && type.types.some((t) => (t.flags & TypeFlags.Undefined) !== 0))
           ) {
             const messageId = methodsRecords[node.name.text];
             if (

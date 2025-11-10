@@ -134,6 +134,7 @@ export default defineConfig({
 
 ### Custom rules
 
-- jsxKey: Validate JSX has key prop when in array or iterator
 - arrayCallbackReturn: Ensure array callbacks that require a return value (map, filter, find, some, ...) don't have undefined in their return type
+- jsxFragmentCheckChildren: Validates that JSX shorthand fragment children match ReactNode type to workaround https://github.com/microsoft/TypeScript/issues/62358
+- jsxKey: Validate JSX has key prop when in array or iterator
 - jsxNoNumberTruthiness: Disallow `list.length && ...` in JSX
