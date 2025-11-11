@@ -1,6 +1,6 @@
 import { type AST, defineRule } from "tsl";
 import { ruleTester } from "tsl/ruleTester";
-import { type Program, SyntaxKind, type Type } from "typescript";
+import { JsxEmit, type Program, type Symbol, SyntaxKind } from "typescript";
 
 const message =
   "Children doesn't match ReactNode type. See https://github.com/microsoft/TypeScript/issues/62358";
@@ -9,7 +9,11 @@ export const jsxFragmentCheckChildren = defineRule(() => ({
   name: "arnaudBarre/jsxFragmentCheckChildren",
   visitor: {
     JsxFragment(context, node) {
-      const reactNodeType = getReactNodeType(context.program);
+      if (context.compilerOptions.jsx !== JsxEmit.ReactJSX) return;
+      const reactNodeSymbol = getReactNodeSymbol(context.program);
+      const reactNodeType = reactNodeSymbol
+        ? context.checker.getDeclaredTypeOfSymbol(reactNodeSymbol)
+        : undefined;
       if (!reactNodeType) {
         context.report({
           node,
@@ -30,8 +34,10 @@ export const jsxFragmentCheckChildren = defineRule(() => ({
   },
 }));
 
-const weekMap: WeakMap<Program, Type> = new WeakMap();
-function getReactNodeType(program: Program) {
+// For some reason I don't yet understand, caching the type leads
+// to false positives in the editor, but caching the symbol works
+const weekMap: WeakMap<Program, Symbol> = new WeakMap();
+function getReactNodeSymbol(program: Program) {
   if (weekMap.has(program)) return weekMap.get(program);
 
   const reactSourceFile = (
@@ -52,9 +58,8 @@ function getReactNodeType(program: Program) {
   const checker = program.getTypeChecker();
   const symbol = checker.getSymbolAtLocation(statement.name);
   if (!symbol) return;
-  const type = checker.getDeclaredTypeOfSymbol(symbol);
-  weekMap.set(program, type);
-  return type;
+  weekMap.set(program, symbol);
+  return symbol;
 }
 
 export function test() {
