@@ -1,14 +1,18 @@
 import { core, createRulesSet } from "tsl";
 import { arrayCallbackReturn } from "./rules/arrayCallbackReturn.ts";
+import { arrayNoEmptyVariadic } from "./rules/arrayNoEmptyVariadic.ts";
 import { jsxFragmentCheckChildren } from "./rules/jsxFragmentCheckChildren.ts";
 import { jsxKey } from "./rules/jsxKey.ts";
 import { jsxNoNumberTruthiness } from "./rules/jsxNoNumberTruthiness.ts";
+import { typedEmptyArray } from "./rules/typedEmptyArray.ts";
 
 export const arnaudBarre = createRulesSet({
   arrayCallbackReturn,
+  arrayNoEmptyVariadic,
   jsxFragmentCheckChildren,
   jsxKey,
   jsxNoNumberTruthiness,
+  typedEmptyArray,
 });
 
 export const allRules = [
