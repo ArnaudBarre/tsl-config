@@ -70,6 +70,13 @@ export const jsxKey = defineRule(() => {
         checkExpression(node.left, context);
         checkExpression(node.right, context);
         break;
+      case SyntaxKind.ParenthesizedExpression:
+      case SyntaxKind.SatisfiesExpression:
+      case SyntaxKind.TypeAssertionExpression:
+      case SyntaxKind.NonNullExpression:
+      case SyntaxKind.AsExpression:
+        checkExpression(node.expression, context);
+        break;
       default:
         break;
     }
@@ -256,6 +263,13 @@ export function test() {
           return <Bar key={key} foo={foo} />
         }`,
         error: messages.keyInProps,
+      },
+      {
+        tsx: true,
+        code: `export function Foo() {
+          return <>{admin && data.slice(0, 10).map(el => (<Bar value={el} />))}</>
+        }`,
+        error: messages.missingKey,
       },
     ],
   });
