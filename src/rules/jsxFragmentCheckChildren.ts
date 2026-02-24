@@ -36,6 +36,7 @@ export const jsxFragmentCheckChildren = defineRule(() => ({
 
 // For some reason I don't yet understand, caching the type leads
 // to false positives in the editor, but caching the symbol works
+// Maybe not needed anymore with getExportsOfModule
 const weekMap: WeakMap<Program, Symbol> = new WeakMap();
 function getReactNodeSymbol(program: Program) {
   if (weekMap.has(program)) return weekMap.get(program);
@@ -44,19 +45,12 @@ function getReactNodeSymbol(program: Program) {
     program.getSourceFiles() as unknown as AST.SourceFile[]
   ).find((sf) => sf.fileName.includes("@types/react/index.d.ts"));
   if (!reactSourceFile) return;
-  const namespace = reactSourceFile.statements.find(
-    (s) => s.kind === SyntaxKind.ModuleDeclaration,
-  );
-  if (!namespace) return;
-  if (namespace.body?.kind !== SyntaxKind.ModuleBlock) return;
-  const statement = namespace.body.statements.find(
-    (s): s is AST.TypeAliasDeclaration =>
-      s.kind === SyntaxKind.TypeAliasDeclaration
-      && s.name.getText() === "ReactNode",
-  );
-  if (!statement) return;
   const checker = program.getTypeChecker();
-  const symbol = checker.getSymbolAtLocation(statement.name);
+  const modSymbol = checker.getSymbolAtLocation(reactSourceFile);
+  if (!modSymbol) return;
+  const symbol = checker
+    .getExportsOfModule(modSymbol)
+    .find((e) => e.getName() === "ReactNode");
   if (!symbol) return;
   weekMap.set(program, symbol);
   return symbol;
